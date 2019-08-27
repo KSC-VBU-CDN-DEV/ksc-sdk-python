@@ -2097,7 +2097,7 @@ shapes:
       Isps:
         shape: String
       Datas:
-        shape: ProvinceAndIspHttpCodeDataList
+        shape: String
   ####省份运营商状态码查询####    
   GetProvinceAndIspHttpCodeRequest:
     type: structure
@@ -2147,7 +2147,7 @@ shapes:
       Isps:
         shape: String
       Datas:
-        shape: ProvinceAndIspHttpCodeDataList
+        shape: String
   ####省份运营商请求数查询####    
   GetProvinceAndIspPvRequest:
     type: structure
@@ -2303,7 +2303,7 @@ shapes:
       ResultType:
         shape: Long
       Datas:
-        shape: SrcHttpCodeDataByTimeList
+        shape: String
   ####回源状态码统计####    
   GetSrcHttpCodeDataRequest:
     type: structure
@@ -2360,7 +2360,7 @@ shapes:
       DomainIds:
         shape: String
       Datas:
-        shape: SrcHttpCodeDataList
+        shape: String
   
   ####top refer统计####    
   GetTopReferDataRequest:

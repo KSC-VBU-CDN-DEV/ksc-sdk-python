@@ -6,6 +6,7 @@ if __name__ == "__main__":
     s = get_session()
     client = s.create_client("cdn", use_ssl=False)
     clientv2 = s.create_client("cdnv2", use_ssl=False)
+    clientv3 = s.create_client("cdnv3", use_ssl=False)
 
     ''' 
     GetCdnDomains 查询域名列表
@@ -20,7 +21,8 @@ if __name__ == "__main__":
     Returns:
         <type 'dict'>
     '''
-    # res = client.get_cdn_domains(PageSize=20,PageNumber=0,DomainName='www.xunfei.cn',DomainStatus='online',CdnType='video')
+    res = client.get_cdn_domains(PageSize=20,PageNumber=0)
+    print(res)
 
     '''
     AddCdnDomain 新增域名
@@ -1676,5 +1678,64 @@ if __name__ == "__main__":
 
     #res = client.ip_check(Ip='1.0.0.1')
     #print(res)
-	
+    '''
+    SetOriginAdvancedConfig 2019-06-01版本 高级回源设置
     
+    #json格式规则 = {
+	"DomainId": "xxxx",
+	"OriginPolicy": "rr",
+	"OriginPolicyBestCount": 1,
+	"MainOriginRule": {
+		"OriginType": "ipaddr",
+		"Origin": "1.1.1.1",
+		"OriginHost":"test.ksyun.com"
+	},
+	"EnableBackupOrigin": "on",
+	"BackupOriginRule": {
+	    "BackupOriginType":"ipaddr",
+	    "BackupOrigin":"1.1.1.1",
+	    "BackupOriginHost":"test.ksyun.com"
+	},
+	"OriginProtocol": "http",
+	"OriginHeaderRules": [
+	    {
+            "OriginHeaderKey":"HA-Ha-ha",
+            "OriginHeaderValue":"defeat"
+	    }
+	],
+	"EnableFollow302": "off",
+	"EnableIgnoreQueryString": "off",
+	"EnableFragmentBackSource": "off",
+	"OriginAuthEnable": "off"
+}
+    '''
+    advancedOrigin = {
+	"DomainId": "xxxx",
+	"OriginPolicy": "rr",
+	"OriginPolicyBestCount": 1,
+	"MainOriginRule": {
+		"OriginType": "ipaddr",
+		"Origin": "1.1.1.1",
+		"OriginHost":"test.ksyun.com"
+	},
+	"EnableBackupOrigin": "on",
+	"BackupOriginRule": {
+	    "BackupOriginType":"ipaddr",
+	    "BackupOrigin":"1.1.1.1",
+	    "BackupOriginHost":"test.ksyun.com"
+	},
+	"OriginProtocol": "http",
+	"OriginHeaderRules": [
+	    {
+            "OriginHeaderKey":"HA-Ha-ha",
+            "OriginHeaderValue":"defeat"
+	    }
+	],
+	"EnableFollow302": "off",
+	"EnableIgnoreQueryString": "off",
+	"EnableFragmentBackSource": "off",
+	"OriginAuthEnable": "off"
+}
+    #res = clientv3.set_origin_advanced_config(**advancedOrigin)
+    #res2 = clientv3.get_domain_configs(DomainId='xxx',ConfigList='');
+    #print(res2)

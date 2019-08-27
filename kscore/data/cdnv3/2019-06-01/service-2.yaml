@@ -1,0 +1,84 @@
+---
+version: '2.1'
+
+metadata:
+  # Version
+  apiVersion: '2019-06-01'
+  endpointPrefix: cdn
+  globalEndpoint: cdn.api.ksyun.com
+  jsonVersion: '1.1'
+  serviceFullName: cdn Service
+  signatureVersion: v4
+  targetPrefix: cdnv3
+  protocol: query-json
+
+documentation: ''
+
+operations:
+  SetOriginAdvancedConfig:
+    name: SetOriginAdvancedConfig
+    protocol: json
+    http:
+      method: POST
+      requestUri: /2019-06-01/domain/SetOriginAdvancedConfig
+
+  GetDomainConfigs:
+    name: GetDomainConfigs
+    http:
+      method: GET
+      requestUri: /2019-06-01/domain/GetDomainConfigs
+    input:
+      shape: GetDomainConfigsRequest
+    output:
+      shape: String
+######################################################################################
+shapes:
+
+  String:
+    type: string
+
+  Bool:
+    type: bool
+
+  Integer:
+    type: integer
+
+  Long:
+    type: long
+
+  DataTime:
+    type: timestamp
+
+  Double:
+    type: double
+
+  Empty:
+    type: structure
+    members: {}
+    documentation: ""
+
+  NonEmptyString:
+    type: string
+    min: 1
+
+  Message:
+    type: string
+
+  InstanceId:
+    type: structure
+    required:
+    - id
+    members:
+      id:
+        shape: Id
+##
+
+  GetDomainConfigsRequest:
+    type: structure
+    required:
+    - DomainId
+    members:
+      DomainId:
+        shape: String
+      ConfigList:
+        shape: String
